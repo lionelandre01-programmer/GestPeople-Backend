@@ -35,7 +35,12 @@ class FuncaoPolicy
      */
     public function create(): bool
     {
-        return false;
+        $user = Auth::user();
+
+        return $user 
+            && $user->funcao 
+            && $user->funcao->denominacao === 'Admin' 
+            || $user->funcao->denominacao === 'Gest';
     }
 
     /**

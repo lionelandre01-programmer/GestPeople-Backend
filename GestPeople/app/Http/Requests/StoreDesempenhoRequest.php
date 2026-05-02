@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Requests;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFuncaoRequest extends FormRequest
+class StoreDesempenhoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,7 @@ class StoreFuncaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'denominacao' => 'required|string|max:255',
-            'responsabilidade' => 'required|string|min:5|max:255',
-            'salario' => 'required|numeric|min:10000'
+            
         ];
     }
 }

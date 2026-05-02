@@ -8,6 +8,17 @@ use App\Models\User;
 class FuncaoService
 {
 
+    public function index()
+    {
+        $funcoes = Funcao::all();
+        $users = User::all();
+
+        return [
+            'funcao' => $funcoes,
+            'members' => $users
+        ];
+    }
+
     public function create($dados){
 
         return Funcao::create($dados);

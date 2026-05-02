@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -66,6 +68,21 @@ class User extends Authenticatable
     public function funcao(): BelongsTo
     {
         return $this->belongsTo(Funcao::class, 'funcao_id', 'id');
+    }
+
+    public function desempenho(): HasMany
+    {
+        return $this->hasMany(Desempenho::class);
+    }
+
+    public function ultDesempenho(): HasOne
+    {
+        return $this->hasOne(Desempenho::class)->latestOfMany();
+    }
+
+    public function presenca(): HasMany
+    {
+        return $this->hasMany(Presenca::class);
     }
 
 }

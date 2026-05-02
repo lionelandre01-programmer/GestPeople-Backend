@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Departamento;
+use App\Models\Suspensao;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\Response;
 
-class DepartamentoPolicy
+class SuspensaoPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,29 +19,23 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(): bool
+    public function view(User $user, Suspensao $suspensao): bool
     {
-        $user = Auth::user();
-
-        return $user 
-            && $user->funcao 
-            && $user->funcao->denominacao === 'Admin' 
-            || $user->funcao->denominacao === 'Gest';
+        return false;
     }
 
     /**
      * Determine whether the user can create models.
-     * Podendo retornar Auth()->user()->role === 'admin'
      */
-    public function create(): bool
+    public function create(User $user): bool
     {
-        return Auth::user()->Funcao->denominacao == "Admin" || Auth::user()->Funcao->denominacao == "Gestor";
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Departamento $departamento): bool
+    public function update(User $user, Suspensao $suspensao): bool
     {
         return false;
     }
@@ -50,7 +43,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Departamento $departamento): bool
+    public function delete(User $user, Suspensao $suspensao): bool
     {
         return false;
     }
@@ -58,7 +51,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Departamento $departamento): bool
+    public function restore(User $user, Suspensao $suspensao): bool
     {
         return false;
     }
@@ -66,7 +59,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Departamento $departamento): bool
+    public function forceDelete(User $user, Suspensao $suspensao): bool
     {
         return false;
     }

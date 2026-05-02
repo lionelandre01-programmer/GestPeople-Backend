@@ -101,4 +101,18 @@ class DepartamentoController extends Controller
 
         return response()->json($countUsers);
     }
+
+    public function eachDep($id)
+    {
+        $this->authorize('view', Departamento::class);
+
+        $dados = $this->departamentoService->eachDep($id);
+
+        return response()->json([
+            'members' => $dados['members'],
+            'dep' => $dados['dep'],
+            'users' => $dados['users'],
+            'bestUser' => $dados['best']
+        ]);
+    }
 }

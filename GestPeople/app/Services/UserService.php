@@ -64,14 +64,8 @@ class UserService
 
         return Desempenho::with('user')
         ->orderByDesc('nivel')
-        ->take(3)
-        ->get()
-        ->map(function ($item) {
-            return [
-                'name' => $item->user->first_name . ' ' . $item->user->last_name,
-                'score' => $item->nivel
-            ];
-        });
+        ->first();
+
     }
 
     public function userSuspended()
@@ -82,6 +76,28 @@ class UserService
     public function activeUsers()
     {
        return User::where('efectividade', 'Activo')->count(); 
+    }
+
+    public function depAllUser(){
+
+        if (Auth::user()->funcao->denominacao === 'Gest' || Auth::user()->funcao->denominacao === 'Admin'){
+
+            if (Auth::user()->funcao->denominacao === 'Admin'){
+
+                return User::with('departamento','funcao')->get();
+
+            }else{
+
+                return User::with('departamento','funcao')->where('id', '!=', Auth::user()->id)->where('id', '!=', 1)->get();
+            
+            }   
+
+        }else{
+
+            return "Não tem permissão para tal";
+
+        }
+
     }
 
 }

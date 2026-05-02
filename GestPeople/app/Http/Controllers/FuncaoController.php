@@ -19,6 +19,18 @@ class FuncaoController extends Controller
         $this->funcaoService = $funcaoService;
     }
 
+    public function index()
+    {
+        $this->authorize('viewAny', Funcao::class);
+
+        $dados = $this->funcaoService->index();
+
+        return response()->json([
+            'funcao' => $dados['funcao'],
+            'members' => $dados['members']
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -30,10 +42,7 @@ class FuncaoController extends Controller
             
         } else {
 
-            if (User::count() != 0){
-
-                $this->authorize('create', Funcao::class);
-            }
+            $this->authorize('create', Funcao::class);
             
             $validatedData = $request->validated();
 

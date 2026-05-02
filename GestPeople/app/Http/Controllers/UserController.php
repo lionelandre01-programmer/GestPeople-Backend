@@ -129,5 +129,13 @@ class UserController extends Controller
         return response()->json(['count' => $usersActive]);
         
     }
+
+    public function depAllUser(){
+
+        $this->authorize('view', User::class);
+
+        return response()->json(['users' => $this->userService->depAllUser()]);
+
+    }
     
 }

@@ -10,6 +10,7 @@ class Presenca extends Model
     protected $fillable = [
         'user_id',
         'presente',
+        'justificada',
     ];
 
     public function user(): BelongsTo

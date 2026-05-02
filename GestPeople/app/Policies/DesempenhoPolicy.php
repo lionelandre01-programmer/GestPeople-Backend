@@ -2,25 +2,17 @@
 
 namespace App\Policies;
 
-use App\Models\Departamento;
+use App\Models\Desempenho;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\Response;
 
-class DepartamentoPolicy
+class DesempenhoPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(): bool
     {
         $user = Auth::user();
 
@@ -31,18 +23,25 @@ class DepartamentoPolicy
     }
 
     /**
-     * Determine whether the user can create models.
-     * Podendo retornar Auth()->user()->role === 'admin'
+     * Determine whether the user can view the model.
      */
-    public function create(): bool
+    public function view(User $user, Desempenho $desempenho): bool
     {
-        return Auth::user()->Funcao->denominacao == "Admin" || Auth::user()->Funcao->denominacao == "Gestor";
+        return false;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Departamento $departamento): bool
+    public function update(User $user, Desempenho $desempenho): bool
     {
         return false;
     }
@@ -50,7 +49,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Departamento $departamento): bool
+    public function delete(User $user, Desempenho $desempenho): bool
     {
         return false;
     }
@@ -58,7 +57,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Departamento $departamento): bool
+    public function restore(User $user, Desempenho $desempenho): bool
     {
         return false;
     }
@@ -66,7 +65,7 @@ class DepartamentoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Departamento $departamento): bool
+    public function forceDelete(User $user, Desempenho $desempenho): bool
     {
         return false;
     }
