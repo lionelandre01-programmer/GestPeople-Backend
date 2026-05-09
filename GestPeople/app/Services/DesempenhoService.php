@@ -9,7 +9,7 @@ class DesempenhoService{
 
     public function index()
     {
-        return User::with('ultDesempenho', 'departamento', 'funcao')->get()->sortByDesc(function($user){
+        return User::with('ultDesempenho', 'departamento', 'funcao', 'ultSuspensao')->get()->sortByDesc(function($user){
             return $user->ultDesempenho->nivel ?? 0;
         })->values();
     }

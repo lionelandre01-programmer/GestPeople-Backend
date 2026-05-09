@@ -2,19 +2,18 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class StoreDesempenhoRequest extends FormRequest
+class StoreMessegeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check() || User::count() === 0;
+        return Auth::check();
     }
 
     /**
@@ -25,7 +24,10 @@ class StoreDesempenhoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'from_user_id' => 'required|integer|exists:users,id',
+            'to_user_id' => 'required|integer|exists:users,id',
+            'body' => 'required|string',
+            'delete' => 'boolean'
         ];
     }
 }

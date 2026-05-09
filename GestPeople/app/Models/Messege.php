@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Suspensao extends Model
+class Messege extends Model
 {
     protected $fillable = [
-        'user_id',
-        'efectivo',
-        'suspenso',
-        'demitido',
+        'from_user_id',
+        'to_user_id',
+        'body',
+        'delete'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
 }

@@ -12,7 +12,7 @@ class StoreSuspensaoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,10 @@ class StoreSuspensaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|integer|exists:users,id',
+            'efectivo' => 'boolean',
+            'suspenso' => 'boolean',
+            'demitido' => 'boolean'
         ];
     }
 }

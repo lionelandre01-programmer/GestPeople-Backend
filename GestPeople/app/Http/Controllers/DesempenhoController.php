@@ -18,8 +18,8 @@ class DesempenhoController extends Controller
     {
         $this->desempenhoService = $desempenhoService;
     }
-    /**
-     * Display a listing of the resource.
+    /*
+    Função que traz todos os usuários e seus desempenhos
      */
     public function index()
     {
@@ -30,8 +30,8 @@ class DesempenhoController extends Controller
         return response()->json($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
+    /*
+    Função para registrar desempenho de um usuário
      */
     public function create(Request $request)
     {

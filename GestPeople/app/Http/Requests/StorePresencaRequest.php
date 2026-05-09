@@ -24,8 +24,12 @@ class StorePresencaRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer|exists:users,id',
-            'presente' => 'required|integer',
-            'justificada' => 'required|integer'
+            'status' => 'required|string|max:15',
+            'justificada' => 'boolean',
+            'entrada' => 'required|date_format:H:i',
+            'entrada' => 'required|date_format:H:i',
+            'justificativa' => 'nullable|string|max:255',
+            'liquidado' => 'boolean'
         ];
     }
 }

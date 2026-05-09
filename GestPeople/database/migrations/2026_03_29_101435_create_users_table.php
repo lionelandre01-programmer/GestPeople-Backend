@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Migration Usuários, que conterá todos os funcionários e suas informações.
      */
     public function up(): void
     {
@@ -20,15 +20,14 @@ return new class extends Migration
             $table->text('morada')->nullable();
             $table->date('nascimento');
             $table->string('image')->nullable();
-            $table->enum('efectividade',['Activo','Suspenso','Demitido'])->default('Activo');
             $table->unsignedBigInteger('departamento_id');
             $table->unsignedBigInteger('funcao_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('bi')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->dropColumn('desempenho');
 
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
             $table->foreign('funcao_id')->references('id')->on('funcaos')->onDelete('cascade');

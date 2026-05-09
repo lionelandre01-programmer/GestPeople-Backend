@@ -18,9 +18,7 @@ class PresencaController extends Controller
         $this->presencaService = $presencaService;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
+    //Função responsável por trazer os usuários e suas faltas ou presenças
     public function index()
     {
         $this->authorize('viewAny', Presenca::class);
@@ -28,9 +26,7 @@ class PresencaController extends Controller
         return response()->json(['user' => $this->presencaService->index()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //Função responsável por registrar faltas ou presenças
     public function store(StorePresencaRequest $request)
     {
 
@@ -42,9 +38,7 @@ class PresencaController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
+    //Função responsável por retornar as faltas ou presenças de de um usuário específico
     public function show($id)
     {
         $this->authorize('viewAny', Presenca::class);

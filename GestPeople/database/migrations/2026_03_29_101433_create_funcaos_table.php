@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('funcaos', function (Blueprint $table) {
             $table->id();
-            $table->string('denominacao');
-            $table->float('salario');
-            $table->text('responsabilidade')->nullable();
+            $table->string('denominacao')->unique(); //Nome da função
+            $table->foreignId('salary_id')->constrained()->cascadeOnDelete(); //Id do salário
+            $table->text('responsabilidade')->nullable(); //Responsabilidade da função
             $table->timestamps();
         });
     }

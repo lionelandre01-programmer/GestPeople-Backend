@@ -48,7 +48,7 @@ class DepartamentoService
 
         if (User::with('ultDesempenho')->where('departamento_id', $id)->exists()){
 
-            $users = User::with('ultDesempenho', 'funcao')->where('departamento_id', $id)->get();
+            $users = User::with('ultDesempenho', 'funcao', 'ultSuspensao')->where('departamento_id', $id)->get();
         
         }else{
 

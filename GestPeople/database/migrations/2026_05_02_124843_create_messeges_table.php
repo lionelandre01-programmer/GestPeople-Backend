@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('messeges', function (Blueprint $table) {
             $table->id();
-            $table->string('denominacao')->unique(); //Nome do Departamento
-            $table->text('responsabilidade')->nullable(); //Responsabilidade do departamento
+            $table->unsignedBigInteger('from_user_id'); //O emissor
+            $table->unsignedBigInteger('to_user_id'); //O receptor
+            $table->text('body'); //A mensagem
+            $table->boolean('delete')->default(false); //Retorna true quando o usuário apaga a mensagem
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos');
+        Schema::dropIfExists('messeges');
     }
 };

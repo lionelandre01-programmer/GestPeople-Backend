@@ -19,6 +19,10 @@ class FuncaoController extends Controller
         $this->funcaoService = $funcaoService;
     }
 
+    /*
+    Função responsável por trazer os cargos e os usuários para 
+    saber o número de usuários que desempenham uma função
+    */
     public function index()
     {
         $this->authorize('viewAny', Funcao::class);
@@ -31,32 +35,27 @@ class FuncaoController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    //Função responsável por cadastrar funções ou cargos
     public function store(StoreFuncaoRequest $request)
     {
-        if (Funcao::where('denominacao', $request->denominacao)->exists()){
 
-            return response()->json(['message' => 'A Função já existe!']);
+        $this->authorize('create', Funcao::class);
             
-        } else {
+        $validatedData = $request->validated();
 
-            $this->authorize('create', Funcao::class);
-            
-            $validatedData = $request->validated();
+        $departamento = $this->funcaoService->create($validatedData);
 
-            $departamento = $this->funcaoService->create($validatedData);
+        return response()->json(['message' => 'Função cadastrada com sucesso']);
 
-            return response()->json(['message' => 'Função cadastrada com sucesso']);
-        }
     }
 
-    /**
-     * Display the specified resource.
+    /*
+    Função que traz todos os cargos
      */
     public function show()
     {
+        $this->authorize('viewAny', Funcao::class);
+
         $funcao = $this->funcaoService->show();
 
         return response()->json($funcao);
@@ -86,6 +85,10 @@ class FuncaoController extends Controller
         //
     }
 
+    /*
+    Função responsável por trazer os cargos 
+    e o número de membros que as desempenham
+    */
     public function usersCount()
     {
         $this->authorize('viewAny', Funcao::class);
@@ -95,6 +98,9 @@ class FuncaoController extends Controller
         return response()->json($users);
     }
 
+    /*
+    Função responsável por trazer o total de cargos 
+    */
     public function countFun()
     {
         $this->authorize('viewAny', Funcao::class);

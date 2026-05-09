@@ -28,16 +28,15 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email',
-            'nascimento' => 'required|date',
+            'nascimento' => 'required|date|before:today',
             'genero' => 'required|string',
             'departamento_id' => 'required|integer|exists:departamentos,id',
             'funcao_id' => 'required|integer|exists:funcaos,id',
             'phone' => 'nullable|string|max:12',
             'password' => 'nullable|string|min:6',
-            'desempenho' => 'nullable|string|max:255',
-            'efectividade' => 'nullable|string|max:255',
             'morada' => 'nullable|string|max:255',
+            'bi' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
-} //FormRequest
+}

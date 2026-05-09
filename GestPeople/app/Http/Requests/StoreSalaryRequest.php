@@ -1,19 +1,18 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFuncaoRequest extends FormRequest
+class StoreSalaryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check() || User::count() === 0;
+        return true;
     }
 
     /**
@@ -24,9 +23,11 @@ class StoreFuncaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'denominacao' => 'required|string|unique:denominacao,funcaos|max:255',
-            'responsabilidade' => 'required|string|min:5|max:255',
-            'salary_id' => 'required|numeric|exists:salaries,id'
+            'salario' => 'required|numeric',
+            'transporte' => 'required|numeric|max:100',
+            'alimentacao' => 'required|numeric|max:100',
+            'desempenho' => 'required|numeric|max:100',
+            'presenca' => 'required|numeric|max:100'
         ];
     }
 }

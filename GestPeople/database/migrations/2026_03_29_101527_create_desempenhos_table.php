@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('desempenhos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->integer('nivel');
+            $table->unsignedBigInteger('user_id'); //O id do usuário
+            $table->integer('nivel'); //Nível do desempenho quanto as actividades bem sucedidas 
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

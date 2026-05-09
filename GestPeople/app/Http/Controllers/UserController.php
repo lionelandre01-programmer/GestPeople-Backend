@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,6 +20,7 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    //Função responsável por cadastrar usuário
     public function store(StoreUserRequest $request){
 
         $validatedData = $request->validated();
@@ -29,8 +31,10 @@ class UserController extends Controller
 
     }
 
+    //Função responsável por realizar o login do usuário
     public function login(Request $request)
     {
+        //User::where('id',1)->update(['password' => Hash::make($request->password)]);
 
         $user = $this->userService->login($request);
 
@@ -48,6 +52,7 @@ class UserController extends Controller
   
     }
 
+    //Função responsável por fazer o logout
     public function logout()
     {
 
@@ -56,25 +61,7 @@ class UserController extends Controller
         return response()->json(['messege' => $messege]);
     }
 
-    public function getAuth()
-    {
-        $user = $this->userService->getAuth();
-
-        if ($user){
-
-            return response()->json([
-            'token' => Auth::user()->currentAcessToken(),
-            'user' => $user
-            ]);
-
-        }else{
-
-            return response()->json(['message' => 'Usuário não autenticado']);
-
-        }
-        
-    }
-
+    //Função responsável por actualizar informações do usuário
     public function update(StoreUserRequest $request)
     {
 
@@ -91,6 +78,7 @@ class UserController extends Controller
         return response()->json(['user' => $user]);
     }
 
+    //Função responsável por retornar todos os usuários (funcionários)
     public function allUsers(){
 
         $this->authorize('view', User::class);
@@ -101,6 +89,7 @@ class UserController extends Controller
 
     }
 
+    //Função responsável por retornar o melhor funcionário
     public function bestsUser(){
 
         $this->authorize('view', User::class);
@@ -111,25 +100,19 @@ class UserController extends Controller
 
     }
 
-    public function userSuspended(){
+    /*Função responsável por retornar os funcionários com seus
+    últimos registros na tabela suspensaos
+    */
+    public function lastSuspensao(){
         
         $this->authorize('view', User::class);
 
         $suspendedUsers = $this->userService->userSuspended();
 
-        return response()->json($suspendedUsers);
+        return response()->json(['user' => $suspendedUsers]);
     }
 
-    public function activeUsers(){
-
-        $this->authorize('view', User::class);
-
-        $usersActive = $this->userService->activeUsers();
-
-        return response()->json(['count' => $usersActive]);
-        
-    }
-
+    //Função responsável por trazer todos os funcionários de cada departamento
     public function depAllUser(){
 
         $this->authorize('view', User::class);

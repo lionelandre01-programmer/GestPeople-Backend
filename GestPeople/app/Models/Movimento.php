@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Presenca extends Model
+class Movimento extends Model
 {
     protected $fillable = [
         'user_id',
-        'status',
-        'entrada',
-        'saida',
-        'data',
-        'justificativa',
-        'justificada',
+        'change_id',
+        'action',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }

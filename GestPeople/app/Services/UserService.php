@@ -2,7 +2,6 @@
 
 namespace App\Services;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\User;
 use App\Models\Desempenho;
 
@@ -11,16 +10,25 @@ class UserService
 
     public function create($dados){
 
-        return User::create($dados);
+        $user = User::create($dados);
+        Suspensao::create(['user_id' => $user->id,]);
+
+        return $user;
     }
 
     public function view(){
 
-        return User::with('departamento', 'funcao')->get();
+        return User::with('departamento', 'funcao', 'ultSuspensao')->get();
     }
 
     public function login($request)
     {
+        if (Auth::check()){
+
+            Auth::user()->tokens()->delete();
+
+        }
+
         if (!Auth::attempt($request->only('email', 'password'))){
 
             return response()->json(['messege' => 'Credenciais Inválidas']);
@@ -28,7 +36,7 @@ class UserService
         } else {
 
             $user = Auth::user();
-            return $user->load('departamento', 'funcao');
+            return $user->load('departamento', 'funcao', 'ultSuspensao');
         }
     }
 
@@ -43,7 +51,7 @@ class UserService
     {
         $user = Auth::user();
         $user->update($data);
-        return $user->load('departamento', 'funcao');
+        return $user->load('departamento', 'funcao', 'ultSuspensao');
     }
 
     public function getAuth()
@@ -70,12 +78,12 @@ class UserService
 
     public function userSuspended()
     {
-        return User::where('efectividade', 'Suspenso')->count();
+        return User::with('ultSuspensao')->get();
     }
 
     public function activeUsers()
     {
-       return User::where('efectividade', 'Activo')->count(); 
+       return User::with('ultSuspensao'); 
     }
 
     public function depAllUser(){
@@ -84,11 +92,11 @@ class UserService
 
             if (Auth::user()->funcao->denominacao === 'Admin'){
 
-                return User::with('departamento','funcao')->get();
+                return User::with('departamento','funcao', 'ultSuspensao')->get();
 
             }else{
 
-                return User::with('departamento','funcao')->where('id', '!=', Auth::user()->id)->where('id', '!=', 1)->get();
+                return User::with('departamento','funcao', 'ultSuspensao')->where('id', '!=', Auth::user()->id)->where('id', '!=', 1)->get();
             
             }   
 

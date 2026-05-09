@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('denominacao')->unique(); //Nome do Departamento
-            $table->text('responsabilidade')->nullable(); //Responsabilidade do departamento
+            $table->float('desconto')->default(0.00); //Total de descontos
+            $table->float('bonus'); //Total de subsídio
+            $table->float('total'); //Total que foi pago
+            $table->date('data'); //Data do pagamento
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos');
+        Schema::dropIfExists('pagamentos');
     }
 };

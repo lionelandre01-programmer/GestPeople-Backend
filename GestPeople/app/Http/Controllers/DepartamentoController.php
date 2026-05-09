@@ -19,9 +19,7 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $departamentos = Departamento::all();
-        $user = Auth::user();
-        return view('sistema.welcome', ['departamentos' => $departamentos, 'user' => $user]);
+
     }
 
     /**
@@ -32,8 +30,8 @@ class DepartamentoController extends Controller
         $this->departamentoService = $departamentoService;
     }
 
-    /**
-     * Store a newly created resource in storage.
+    /*
+    Função para cadastrar departamentos
      */
     public function store(StoreDepartamentoRequest $request)
     {
@@ -57,8 +55,8 @@ class DepartamentoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
+    /*
+    Função que retorna todos os departamentos
      */
     public function show()
     {
@@ -93,6 +91,9 @@ class DepartamentoController extends Controller
         //
     }
 
+    /*
+    Função que retorna o número de usuários por departamento
+    */
     public function usersCount()
     {
         $this->authorize('view', Departamento::class);
@@ -102,6 +103,9 @@ class DepartamentoController extends Controller
         return response()->json($countUsers);
     }
 
+    /*
+    Função que retorna um departamento específico e suas informações
+    */
     public function eachDep($id)
     {
         $this->authorize('view', Departamento::class);

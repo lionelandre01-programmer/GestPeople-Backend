@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos', function (Blueprint $table) {
+        Schema::create('movimentos', function (Blueprint $table) {
             $table->id();
-            $table->string('denominacao')->unique(); //Nome do Departamento
-            $table->text('responsabilidade')->nullable(); //Responsabilidade do departamento
+            $table->foreignId('user_id')->constrained(); //O responsável pelo movimento
+            $table->foreignId('change_id')->constrained()->nullable(); //Id das mundanças
+            $table->string('action'); //O que foi feito
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos');
+        Schema::dropIfExists('movimentos');
     }
 };

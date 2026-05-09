@@ -28,8 +28,6 @@ class User extends Authenticatable
         'genero',
         'morada',
         'nascimento',
-        'desempenho',
-        'efectividade',
         'departamento_id',
         'funcao_id',
         'email',
@@ -83,6 +81,26 @@ class User extends Authenticatable
     public function presenca(): HasMany
     {
         return $this->hasMany(Presenca::class);
+    }
+
+    public function suspensao(): HasMany
+    {
+        return $this->hasMany(Suspensao::class);
+    }
+
+    public function ultSuspensao(): HasOne
+    {
+        return $this->hasOne(Suspensao::class)->latestOfMany();
+    }
+
+    public function movimento(): HasMany
+    {
+        return $this->hasMany(Movimento::class);
+    }
+
+    public function messege(): HasMany
+    {
+        return $this->hasMany(Messege::class);
     }
 
 }

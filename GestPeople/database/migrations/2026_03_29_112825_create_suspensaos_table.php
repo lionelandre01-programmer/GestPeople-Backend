@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('suspensaos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->boolean('efectivo')->default(1);
-            $table->boolean('suspenso')->default(0);
-            $table->boolean('demitido')->default(0);
+            $table->unsignedBigInteger('user_id'); //Id do usuário
+            $table->boolean('efectivo')->default(true); //É efectivo
+            $table->boolean('suspenso')->default(false); //É efectivo mas está suspenso
+            $table->boolean('demitido')->default(false); //Demitido
+            $table->date('inicio')->nullable(); //Início da suspensão
+            $table->date('fim')->nullable(); //Fim da suspensão
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
