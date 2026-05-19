@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('messeges', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id'); //O emissor
-            $table->unsignedBigInteger('to_user_id'); //O receptor
+            $table->foreignId('from_user_id')->constrained('users')->cascadeOnDelete(); //O emissor
+            $table->foreignId('to_user_id')->constrained('users')->cascadeOnDelete(); //O receptor
             $table->text('body'); //A mensagem
             $table->boolean('delete')->default(false); //Retorna true quando o usuário apaga a mensagem
             $table->timestamps();

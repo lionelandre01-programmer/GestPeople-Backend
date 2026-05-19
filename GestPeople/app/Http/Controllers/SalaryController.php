@@ -45,9 +45,12 @@ class SalaryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Salary $salary)
+    public function show($id)
     {
-        //
+        $this->authorize('viewAny', Salary::class);
+
+        return response()->json($this->salaryService->show($id));
+
     }
 
     /**

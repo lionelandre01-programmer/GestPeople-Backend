@@ -15,6 +15,7 @@ Este repositório contém apenas o **backend** do projeto. O frontend está disp
 - 📊 **Desempenho**: Acompanhamento do desempenho de funcionários
 - 📅 **Presenças**: Registo de presenças e assiduidade
 - 🚫 **Suspensões**: Gestão de suspensões de funcionários
+- 🗨 **Chat**: Conversa interna entre os funcioários 
 - 📈 **Relatórios**: Estatísticas e contadores (utilizadores por departamento, funções, etc.)
 
 ## 🛠️ Tecnologias Utilizadas
@@ -277,10 +278,10 @@ Este projeto está sob a licença [MIT](LICENSE).
 
 ## 👥 Autor
 
-Desenvolvido como um sistema de gestão de recursos humanos.
+Desenvolvido Por Lionel Cristóvão André.
 
 ---
 
 **Status do Projeto**: Em desenvolvimento 🚧
 
-**Última atualização**: Abril de 2026
+**Última atualização**: Maio de 2026

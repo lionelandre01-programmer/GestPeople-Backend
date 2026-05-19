@@ -33,6 +33,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
+        'bi'
     ];
 
     /**
@@ -101,6 +102,11 @@ class User extends Authenticatable
     public function messege(): HasMany
     {
         return $this->hasMany(Messege::class);
+    }
+
+    public function ultMessege(): HasOne
+    {
+        return $this->hasOne(Messege::class)->latestOfMany();
     }
 
 }

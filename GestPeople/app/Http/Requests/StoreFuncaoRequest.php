@@ -24,7 +24,7 @@ class StoreFuncaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'denominacao' => 'required|string|unique:denominacao,funcaos|max:255',
+            'denominacao' => 'required|string|unique:funcaos,denominacao|max:255',
             'responsabilidade' => 'required|string|min:5|max:255',
             'salary_id' => 'required|numeric|exists:salaries,id'
         ];

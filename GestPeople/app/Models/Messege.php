@@ -14,9 +14,14 @@ class Messege extends Model
         'delete'
     ];
 
-    public function user(): BelongsTo
+    public function fromUser(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'from_user_id');
+    }
+
+    public function toUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'to_user_id');
     }
 
 }

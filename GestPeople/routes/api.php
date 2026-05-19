@@ -73,6 +73,7 @@ Route::group(['prefix' => 'salary', 'middleware' => 'auth:sanctum'], function(){
 
     Route::get('/', [SalaryController::class, 'index']);
     Route::post('/create', [SalaryController::class, 'store']);
+    Route::get('/show/{id}', [SalaryController::class, 'show']);
 });
 
 //Grupo de rotas para acessar as funcionalidades para interagir com os Suspensão

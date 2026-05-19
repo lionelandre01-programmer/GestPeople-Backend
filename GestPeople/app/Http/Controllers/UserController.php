@@ -73,9 +73,7 @@ class UserController extends Controller
             $validatedData['image'] = $request->file('image')->store('perfil', 'public');
         }
 
-        $user = $this->userService->update($validatedData);
-
-        return response()->json(['user' => $user]);
+        return response()->json($this->userService->update($validatedData));
     }
 
     //Função responsável por retornar todos os usuários (funcionários)

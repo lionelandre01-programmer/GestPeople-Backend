@@ -35,7 +35,7 @@ class StoreUserRequest extends FormRequest
             'phone' => 'nullable|string|max:12',
             'password' => 'nullable|string|min:6',
             'morada' => 'nullable|string|max:255',
-            'bi' => 'required|string|max:255',
+            'bi' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }

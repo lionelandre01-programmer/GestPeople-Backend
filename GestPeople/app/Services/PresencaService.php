@@ -12,16 +12,16 @@ class PresencaService
     
         $user = User::withCount([
             'presenca as presencas_total' => function ($query){
-                $query->where('status', 'presente');
+                $query->where('status', 'presente')->where('liquidado', false);
             }, 
             'presenca as faltas_total' => function ($query){
-                $query->where('status', 'ausente');
+                $query->where('status', 'ausente')->where('liquidado', false);
             }, 
             'presenca as justificadas' => function ($query){
-                $query->where('justificada', true)->where('status', 'ausente');
+                $query->where('justificada', true)->where('status', 'ausente')->where('liquidado', false);
             }, 
             'presenca as nao_justificadas' => function ($query){
-                $query->where('justificada', false)->where('status', 'ausente');
+                $query->where('justificada', false)->where('status', 'ausente')->where('liquidado', false);
             }
         ])->get();
 

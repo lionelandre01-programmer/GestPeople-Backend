@@ -3,6 +3,7 @@
 namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Suspensao;
 use App\Models\Desempenho;
 
 class UserService
@@ -11,6 +12,7 @@ class UserService
     public function create($dados){
 
         $user = User::create($dados);
+
         Suspensao::create(['user_id' => $user->id,]);
 
         return $user;
